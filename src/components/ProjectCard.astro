@@ -1,0 +1,48 @@
+---
+let { name, brief, hyperlink, icon } = Astro.props;
+---
+
+<a href={hyperlink}>
+	<div class="container" onclick={hyperlink}>
+		<div>
+			<h3>{name}</h3>
+			<p>{brief}</p>
+		</div>
+		<div class="icon">
+			<img src={icon} />
+		</div>
+	</div>
+</a>
+
+<style>
+	.container {
+		border: 2px solid #12fe94;
+		width: 66%;
+		display: grid;
+		grid-template-columns: 50% 50%;
+		padding: 10px;
+		margin: 5%;
+	}
+
+	div:hover {
+		background-color: #12fe94;
+		color: black;
+	}
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.icon {
+		margin: auto auto;
+		text-align: center;
+	}
+
+	img {
+		/* filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(254deg) */
+		/* brightness(96%) contrast(106%); */
+		margin: auto auto;
+		height: 50%;
+		width: 50%;
+	}
+</style>

@@ -85,7 +85,7 @@ let { entries } = Astro.props;
 <ul id="menu-options">
 	{
 		entries.map((item) => (
-			<a href={"/" + item.subject}>
+			<a href={item.route}>
 				<li>{item.subject}</li>
 			</a>
 		))
@@ -101,11 +101,14 @@ let { entries } = Astro.props;
 	a:hover,
 	.active {
 		border: 2px solid #12fe94;
+		background-color: #b1e2c1;
+		color: #102031;
 	}
 	a {
 		padding: 10px;
 		list-style: none;
 		border: 2px solid transparent;
+		border-left: 2px solid #12fe94;
 		display: block;
 		text-decoration: none;
 		color: white;

@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import NavBar from "../components/NavBar.astro";
+import type { GetStaticPaths } from "astro";
+
+let projects = [
+	{
+		name: "columbia-dev",
+		brief: "This website",
+		icon: "/astro.svg",
+		hyperlink: "https://github.com/gd0st/columbia-astro-redux",
+	},
+	{
+		name: "todo-rs",
+		brief: "A simple todo scheduling application",
+		icon: "/rust.svg",
+		hyperlink: "https://github.com/gd0st/todo-rs",
+	},
+	{
+		name: "kadeu",
+		brief: "A CLI first flashcard application",
+		icon: "/rust.svg",
+		hyperlink: "https://github.com/gd0st/kadeu",
+	},
+];
+
+let brief = "Rust, Golang, HTML, Javascript, Python, CSS and more!";
+---
+
+<Layout title="Yannick">
+	<p>{brief}</p>
+	<div id="projects">
+		{
+			projects.map((project) => (
+				<ProjectCard
+					name={project.name}
+					brief={project.brief}
+					hyperlink={project.hyperlink}
+					icon={project.icon}
+				/>
+			))
+		}
+	</div>
+</Layout>
+
+<style>
+	#projects {
+		display: grid;
+		grid-template-columns: 50% 50%;
+		justify-items: center;
+		text-align: center;
+	}
+	p {
+		text-align: center;
+	}
+	#shell {
+		border: 2px solid #102031;
+		display: grid;
+		font-family: "Orbitron";
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	#version-descriptor {
+		text-align: right;
+		margin-right: 2px;
+	}
+</style>

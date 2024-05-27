@@ -2,13 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import NavBar from "../components/NavBar.astro";
 import type { GetStaticPaths } from "astro";
-let body = "Welcome";
+let brief = "Thank you for visting!";
 ---
 
 <Layout title="Yannick">
-	<div>
-		<p>{body}</p>
-	</div>
+	<article>
+		<h2>{brief}</h2>
+	</article>
 </Layout>
 
 <style>
