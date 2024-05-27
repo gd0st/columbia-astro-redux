@@ -1,17 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
-let entries = [
-	{ subject: "About", brief: "Yannick!" },
-	{
-		subject: "Projects",
-		brief: "Rust, Golang, HTML, Javascript, Python, CSS and more!",
-	},
-	{
-		subject: "Extra",
-		brief: "How to connect with me!",
-	},
-];
+let { entries } = Astro.props;
 ---
 
 <script>
@@ -94,26 +82,17 @@ let entries = [
 	});
 </script>
 
-<Layout>
-	<div id="shell">
-		<h1>Yannick Dorn</h1>
-		<div id="inner"></div>
-		<ul id="menu-options">
-			{entries.map((item) => <li>{item.subject}</li>)}
-		</ul>
-
-		<a href="https://github.com/gd0st">
-			<p id="version-descriptor">v 0.1.0</p>
-		</a>
-	</div>
-</Layout>
+<ul id="menu-options">
+	{
+		entries.map((item) => (
+			<a href={"/" + item.subject}>
+				<li>{item.subject}</li>
+			</a>
+		))
+	}
+</ul>
 
 <style>
-	#shell {
-		border: 2px solid #102031;
-		display: grid;
-		font-family: "Orbitron";
-	}
 	.active {
 		background-color: #12fe94;
 		color: black;
@@ -122,9 +101,6 @@ let entries = [
 	li:hover,
 	.active {
 		border: 2px solid #12fe94;
-	}
-	h1 {
-		color: #4deeff;
 	}
 	li {
 		padding: 10px;
