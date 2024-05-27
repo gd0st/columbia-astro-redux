@@ -1,0 +1,48 @@
+---
+import NavBar from "../components/NavBar.astro";
+import Layout from "../layouts/Layout.astro";
+let entries = [
+	{ subject: "about", brief: "Yannick!", param: { slug: "about" } },
+	{
+		subject: "projects",
+		brief: "Rust, Golang, HTML, Javascript, Python, CSS and more!",
+		param: { slug: "about" },
+	},
+	{
+		subject: "extra",
+		brief: "How to connect with me!",
+		param: { slug: "extra" },
+	},
+];
+---
+
+<Layout title="Yannick">
+	<h1>Yannick Dorn</h1>
+	<div id="shell">
+		<NavBar {entries} />
+	</div>
+</Layout>
+
+<style>
+	h1 {
+		color: #4deeff;
+		font-family: "Orbitron";
+	}
+	p {
+		text-align: center;
+	}
+	#shell {
+		border: 2px solid #102031;
+		display: grid;
+		font-family: "Orbitron";
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	#version-descriptor {
+		text-align: right;
+		margin-right: 2px;
+	}
+</style>
