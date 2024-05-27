@@ -1,0 +1,58 @@
+---
+let { brief, subject } = Astro.props;
+---
+
+<li class="">
+	<div class="arrow"></div>
+	<div class="content">
+		<p class="subject">{subject}</p>
+		<!-- <p class="brief">
+			{brief}
+		</p> -->
+	</div>
+</li>
+
+<style>
+	li.active .arrow {
+		width: 0;
+		height: 0;
+		border-left: 10px solid white;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+	}
+	li .arrow {
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-top: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+	}
+	li {
+		display: flex;
+		margin: 10px 0;
+		list-style: none;
+		text-anchor: middle;
+	}
+
+	.brief {
+		color: transparent;
+		overflow: hidden;
+		font-size: 75%;
+	}
+
+	.content {
+		display: flex;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	li p {
+		margin: auto 20px;
+	}
+
+	li div {
+		margin: auto 0;
+	}
+</style>
+<script></script>
