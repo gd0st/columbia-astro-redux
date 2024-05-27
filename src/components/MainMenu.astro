@@ -40,9 +40,11 @@ console.log(menuItems);
 
 	window.addEventListener("load", (event) => {
 		console.log("loaded");
+		let pItemsContainer = "content-box";
 		let menuItemsId = "menu-items";
 
 		let menuItems = document.getElementById(menuItemsId);
+		let pItems = document.getElementById(pItemsContainer);
 
 		if (!(menuItems instanceof HTMLElement)) {
 			console.error(`Could not find ${menuItemsId}`);
@@ -51,6 +53,7 @@ console.log(menuItems);
 		// Init the position to the top.
 		if (menuItems.children.length > 0) {
 			setPositionClass(menuItems.children, 0, "active");
+			setPositionClass(pItems.children, 0, "active");
 		}
 	});
 
@@ -122,7 +125,9 @@ console.log(menuItems);
 		z-index: -1;
 	}
 	#content-box {
-		border: 2px solid white;
+		border-right: 2px solid white;
+		border-bottom: 2px solid white;
 		position: relative;
+		margin-left: 25%;
 	}
 </style>
