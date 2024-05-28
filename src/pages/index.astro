@@ -1,13 +1,89 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
 import NavBar from "../components/NavBar.astro";
-import type { GetStaticPaths } from "astro";
-let body = "Welcome";
+import Projects from "../components/projects/Projects.astro";
+import BlogIndex from "./blog/index.astro";
+let entries = [
+	{
+		subject: "home",
+		route: "#",
+		brief: "Yannick!",
+		param: { slug: "about" },
+	},
+	{
+		subject: "projects",
+		route: "#projects",
+		brief: "Rust, Golang, HTML, Javascript, Python, CSS and more!",
+		param: { slug: "about" },
+	},
+	{
+		subject: "articles",
+		route: "#blog",
+		brief: "My writing and other interesting things I like",
+		param: { slug: "extra" },
+	},
+	{
+		subject: "extra",
+		route: "#extra",
+		brief: "How to connect with me!",
+		param: { slug: "extra" },
+	},
+];
+
+let projects = [
+	{
+		name: "columbia-dev",
+		brief: "This website",
+		icon: "/astro.svg",
+		hyperlink: "https://github.com/gd0st/columbia-astro-redux",
+	},
+	{
+		name: "todo-rs",
+		brief: "A simple todo scheduling application",
+		icon: "/rust.svg",
+		hyperlink: "https://github.com/gd0st/todo-rs",
+	},
+	{
+		name: "kadeu",
+		brief: "A CLI first flashcard application",
+		icon: "/rust.svg",
+		hyperlink: "https://github.com/gd0st/kadeu",
+	},
+];
 ---
 
-<Layout title="Yannick">
-	<div>
-		<p>{body}</p>
+<Layout title="Yannick" {entries}>
+	<div id="shell">
+		<!-- <nav>
+			<NavBar {entries} />
+		</nav> -->
+
+		<div id="about">
+		<Section title="" anchor="">
+			<p>Thank you for visting my page</p>
+		</Section>
+		</div>
+
+		<div id="blog">
+		<Section
+			title="articles"
+			anchor="blog"
+			brief="My writing and other interesting things I like."
+			><BlogIndex /></Section
+		>
+
+		</div>
+
+		<div id="projects">
+		<Section title="projects" anchor="projects">
+			<Projects />
+		</Section>
+		</div>
+
+		<div id="extra">
+			<Section title="extra" anchor="extra" brief="" />
+		</div>
 	</div>
 </Layout>
 
@@ -19,11 +95,18 @@ let body = "Welcome";
 	p {
 		text-align: center;
 	}
-	#shell {
-		border: 2px solid #102031;
-		display: grid;
-		font-family: "Orbitron";
+	nav {
+		border-right: 2px solid #102031;
 	}
+	#shell {
+		// border: 2px solid #102031;
+		display: grid;
+		gap: 1.5vw;
+		margin: 0 5%;
+		grid-template-columns: 60% 40%;
+		height: 100%;
+	}
+
 	a {
 		color: inherit;
 		text-decoration: none;

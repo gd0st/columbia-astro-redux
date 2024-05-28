@@ -1,33 +1,8 @@
 ---
 import NavBar from "../components/NavBar.astro";
-const { title } = Astro.props;
+import Section from "../components/Section.astro";
+const { title, entries } = Astro.props;
 const version = "0.1.0";
-let entries = [
-	{
-		subject: "home",
-		route: "/",
-		brief: "Yannick!",
-		param: { slug: "about" },
-	},
-	{
-		subject: "projects",
-		route: "/projects",
-		brief: "Rust, Golang, HTML, Javascript, Python, CSS and more!",
-		param: { slug: "about" },
-	},
-	{
-		subject: "articles",
-		route: "/blog",
-		brief: "My writing and other interesting things I like",
-		param: { slug: "extra" },
-	},
-	{
-		subject: "extra",
-		route: "/extra",
-		brief: "How to connect with me!",
-		param: { slug: "extra" },
-	},
-];
 ---
 
 <html lang="en">
@@ -38,60 +13,49 @@ let entries = [
 	</head>
 
 	<body>
-		<h1>Yannick Dorn</h1>
-		<div id="shell">
-			<nav>
-				<NavBar {entries} />
-				<a id="version-descriptor" href="https://github.com/gd0st">
-					<p>v {version}</p>
-				</a>
-			</nav>
-			<article>
-				<slot />
-			</article>
-		</div>
+		<h1><a href="#">Yannick Dorn</a></h1>
+		<slot />
+		<a id="version-descriptor" href="https://github.com/gd0st">
+			<p>v {version}</p>
+		</a>
 	</body>
-
-	<style is:global>
-		nav {
-			border-right: 2px solid #102031;
-		}
-		h1 {
-			color: #4deeff;
-			font-family: "Orbitron";
-		}
-		#shell {
-			border: 2px solid #102031;
-			display: grid;
-			margin: 0 5%;
-			grid-template-columns: 20% 80%;
-			font-family: "Orbitron";
-		}
-		#version-descriptor {
-			text-align: right;
-			margin-right: 2px;
-			color: inherit;
-			display: inline-block;
-			text-decoration: none;
-		}
-		body {
-			background-color: black;
-			color: white;
-		}
-		@font-face {
-			font-family: "Press Start 2P";
-			src: url("/fonts/PressStart2P-Regular.ttf");
-			font-weight: normal;
-			font-style: normal;
-			font-display: swap;
-		}
-
-		@font-face {
-			font-family: "Orbitron";
-			src: url("/fonts/Orbitron-Regular.ttf");
-			font-weight: normal;
-			font-style: normal;
-			font-display: swap;
-		}
-	</style>
 </html>
+
+<style is:global>
+	h1 {
+		color: #4deeff;
+		font-family: "Orbitron";
+	}
+	#version-descriptor {
+		margin-right: 2px;
+		color: inherit;
+		display: inline-block;
+		text-decoration: none;
+		float: right;
+	}
+	a {
+		text-decoration: none;
+		color: #4deeff;
+	}
+	body {
+		background-color: black;
+		font-family: "Orbitron";
+		color: white;
+	}
+
+	@font-face {
+		font-family: "Press Start 2P";
+		src: url("/fonts/PressStart2P-Regular.ttf");
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Orbitron";
+		src: url("/fonts/Orbitron-Regular.ttf");
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+</style>

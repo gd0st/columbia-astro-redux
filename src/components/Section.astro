@@ -1,7 +1,18 @@
 ---
-let { title, anchor } = Astro.props;
+let { title, anchor, brief = "" } = Astro.props;
 ---
 
-<div id={"#" + anchor}>
+<div id={anchor}>
 	<h2>{title}</h2>
+	<h3>{brief}</h3>
+	<slot />
 </div>
+
+<style>
+	div {
+		border: 2px solid #102031;
+	}
+	h2 {
+		color: white;
+	}
+</style>

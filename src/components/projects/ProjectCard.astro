@@ -6,22 +6,20 @@ let { name, brief, hyperlink, icon } = Astro.props;
 	<div class="container" onclick={hyperlink}>
 		<div>
 			<h3>{name}</h3>
-			<p>{brief}</p>
 		</div>
-		<div class="icon">
-			<img src={icon} />
+		<div>
+			<p>{brief}</p>
 		</div>
 	</div>
 </a>
 
 <style>
 	.container {
-		border: 2px solid #12fe94;
-		width: 66%;
+		border: 2px solid #102031;
+		width: 50%;
 		display: grid;
 		grid-template-columns: 50% 50%;
-		padding: 10px;
-		margin: 5%;
+		margin: 1% 0;
 	}
 
 	div:hover {

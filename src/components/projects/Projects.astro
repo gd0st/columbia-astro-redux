@@ -1,9 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import NavBar from "../components/NavBar.astro";
-import type { GetStaticPaths } from "astro";
-
+import ProjectCard from "./ProjectCard.astro";
 let projects = [
 	{
 		name: "columbia-dev",
@@ -28,44 +24,35 @@ let projects = [
 let brief = "Rust, Golang, HTML, Javascript, Python, CSS and more!";
 ---
 
-<Layout title="Yannick">
-	<p>{brief}</p>
-	<div id="projects">
+<div id="projects">
+	<ul>
 		{
 			projects.map((project) => (
-				<ProjectCard
-					name={project.name}
-					brief={project.brief}
-					hyperlink={project.hyperlink}
-					icon={project.icon}
-				/>
+				<li>
+					<ProjectCard
+						name={project.name}
+						brief={project.brief}
+						hyperlink={project.hyperlink}
+						icon={project.icon}
+					/>
+				</li>
 			))
 		}
-	</div>
-</Layout>
+	</ul>
+</div>
 
 <style>
 	#projects {
-		display: grid;
-		grid-template-columns: 50% 50%;
-		justify-items: center;
 		text-align: center;
+	}
+
+	li {
+		list-style: none;
 	}
 	p {
 		text-align: center;
 	}
-	#shell {
-		border: 2px solid #102031;
-		display: grid;
-		font-family: "Orbitron";
-	}
 	a {
 		color: inherit;
-		text-decoration: none;
-	}
-
-	#version-descriptor {
-		text-align: right;
-		margin-right: 2px;
 	}
 </style>

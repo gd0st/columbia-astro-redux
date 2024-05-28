@@ -1,5 +1,7 @@
 ---
-let { entries } = Astro.props;
+let { entries, anchor = false } = Astro.props;
+
+let anchorClass = anchor ? "with-anchor" : "";
 ---
 
 <script>
@@ -82,7 +84,7 @@ let { entries } = Astro.props;
 	});
 </script>
 
-<ul id="menu-options">
+<ul class={anchorClass} id="menu-options">
 	{
 		entries.map((item) => (
 			<a href={item.route}>
@@ -93,6 +95,9 @@ let { entries } = Astro.props;
 </ul>
 
 <style>
+	#menu-options.with-anchor {
+		position: fixed;
+	}
 	.active {
 		background-color: #12fe94;
 		color: black;
