@@ -1,119 +1,65 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Section from "../components/Section.astro";
-import NavBar from "../components/NavBar.astro";
 import Projects from "../components/projects/Projects.astro";
-import BlogIndex from "./blog/index.astro";
-let entries = [
-	{
-		subject: "home",
-		route: "#",
-		brief: "Yannick!",
-		param: { slug: "about" },
-	},
-	{
-		subject: "projects",
-		route: "#projects",
-		brief: "Rust, Golang, HTML, Javascript, Python, CSS and more!",
-		param: { slug: "about" },
-	},
-	{
-		subject: "articles",
-		route: "#blog",
-		brief: "My writing and other interesting things I like",
-		param: { slug: "extra" },
-	},
-	{
-		subject: "extra",
-		route: "#extra",
-		brief: "How to connect with me!",
-		param: { slug: "extra" },
-	},
-];
-
-let projects = [
-	{
-		name: "columbia-dev",
-		brief: "This website",
-		icon: "/astro.svg",
-		hyperlink: "https://github.com/gd0st/columbia-astro-redux",
-	},
-	{
-		name: "todo-rs",
-		brief: "A simple todo scheduling application",
-		icon: "/rust.svg",
-		hyperlink: "https://github.com/gd0st/todo-rs",
-	},
-	{
-		name: "kadeu",
-		brief: "A CLI first flashcard application",
-		icon: "/rust.svg",
-		hyperlink: "https://github.com/gd0st/kadeu",
-	},
-];
+import Section from "../components/Section.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Yannick" {entries}>
-	<div id="shell">
-		<!-- <nav>
-			<NavBar {entries} />
-		</nav> -->
-
-		<div id="about">
+<Layout>
+	<div class="shell">
 		<Section title="" anchor="">
-			<p>Thank you for visting my page</p>
+			<p>
+				Thank you for visiting my website. Browser my <a
+					href="#projects">projects</a
+				>, or read some content
+			</p>
+			<p>I live in Chicago, and work for a Propritary Trading company</p>
+			<p>For recreation, I enjoy playing rugby, music and writing code</p>
+			<p>
+				If you'd like to get in contact, check out the <a href="#extra"
+					>extra</a
+				> section
+			</p>
 		</Section>
-		</div>
-
-		<div id="blog">
+		<Section title="blog" anchor="blog" brief="Straight from the dome" />
 		<Section
-			title="articles"
-			anchor="blog"
-			brief="My writing and other interesting things I like."
-			><BlogIndex /></Section
+			title="projects"
+			brief="Let me show you my wares"
+			anchor="projects"
 		>
-
-		</div>
-
-		<div id="projects">
-		<Section title="projects" anchor="projects">
 			<Projects />
 		</Section>
-		</div>
-
-		<div id="extra">
-			<Section title="extra" anchor="extra" brief="" />
-		</div>
+		<Section title="extra" anchor="extra" brief="" />
+		<!-- <div>One</div>
+	<div>Two</div>
+	<div>Adding more text here</div>
+	<div>Four</div>
+	<div>Five</div>
+	<div>Six</div>
+	<div>Seven</div> -->
 	</div>
 </Layout>
 
 <style>
-	h1 {
-		color: #4deeff;
-		font-family: "Orbitron";
-	}
-	p {
-		text-align: center;
-	}
-	nav {
-		border-right: 2px solid #102031;
-	}
-	#shell {
-		// border: 2px solid #102031;
-		display: grid;
-		gap: 1.5vw;
-		margin: 0 5%;
-		grid-template-columns: 60% 40%;
+	.shell {
+		margin: 0 auto;
+		width: 60%;
 		height: 100%;
+		display: grid;
+		gap: 1vw;
+		border: 2px solid #102031;
+		/* display: grid;
+		grid-template-columns: [first] 60% [second] auto;
+		grid-template-rows: [firstr] 60% [secondr] auto;
+		grid-gap: 1vw; */
 	}
 
-	a {
-		color: inherit;
-		text-decoration: none;
+	.shell {
+		padding: 0 20px;
 	}
 
-	#version-descriptor {
-		text-align: right;
-		margin-right: 2px;
+	@media screen and (max-width: 900px) {
+		.box {
+			width: 90%;
+		}
 	}
 </style>

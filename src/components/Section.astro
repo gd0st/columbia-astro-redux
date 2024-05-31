@@ -1,18 +1,20 @@
 ---
-let { title, anchor, brief = "" } = Astro.props;
+let { grow = "", title, anchor, brief = "" } = Astro.props;
 ---
 
-<div id={anchor}>
+<div id={anchor} class={grow}>
 	<h2>{title}</h2>
 	<h3>{brief}</h3>
 	<slot />
 </div>
 
 <style>
-	div {
-		border: 2px solid #102031;
-	}
 	h2 {
 		color: white;
+		text-transform: uppercase;
+	}
+
+	div:hover > h2 {
+		color: #4deeff;
 	}
 </style>

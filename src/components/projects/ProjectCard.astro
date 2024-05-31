@@ -5,7 +5,7 @@ let { name, brief, hyperlink, icon } = Astro.props;
 <a href={hyperlink}>
 	<div class="container" onclick={hyperlink}>
 		<div>
-			<h3>{name}</h3>
+			<h3 id="title">{name}</h3>
 		</div>
 		<div>
 			<p>{brief}</p>
@@ -16,10 +16,10 @@ let { name, brief, hyperlink, icon } = Astro.props;
 <style>
 	.container {
 		border: 2px solid #102031;
-		width: 50%;
-		display: grid;
-		grid-template-columns: 50% 50%;
-		margin: 1% 0;
+		height: 100%;
+		width: 100%;
+		/* display: grid; */
+		/* grid-template-columns: 50% 50%; */
 	}
 
 	div:hover {
