@@ -1,16 +1,16 @@
 {
-  "name": "tetris-menu",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "^10.2.6",
-    "astro": "^4.8.6"
-  }
+	"name": "columbia",
+	"type": "module",
+	"version": "0.2.0",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/cloudflare": "^10.2.6",
+		"astro": "^4.8.6"
+	}
 }
