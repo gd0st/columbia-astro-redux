@@ -1,0 +1,9 @@
+---
+let { name, complete = false } = Astro.props;
+console.log(name, complete);
+---
+
+<div class="todo">
+	<input type="checkbox" />
+	<label>{name}</label>
+</div>
