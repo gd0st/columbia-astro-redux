@@ -20,7 +20,7 @@ console.log(todos);
 		}
 	}
 
-	customElements.define("todo", Todo, { extends: "div"})
+	customElements.define("col-todo", Todo, { extends: "div"})
 
 	class TodoList extends HTMLUListElement {
 		constructor() {
@@ -33,12 +33,12 @@ console.log(todos);
 		 */
 		newTodo(todo) {
 			let li = document.createElement("li")
-			li.appendChild(todo)
+			 li.appendChild(todo)
 			this.appendChild(li)
 		}
 	}
 
-	customElements.define("todo-list", TodoList, {extends: "div"})
+	customElements.define("todo-list", TodoList, {extends: "ul"})
 
 
 	/**
@@ -72,18 +72,27 @@ console.log(todos);
 				throw new Error("todo-subject is not input field.");
 			}
 
-			let li = document.createElement("li");
-			li.appendChild(makeTodo(subject.value, false));
-			let ul = document.getElementById("todo-list");
-			ul.appendChild(li);
+			let list = document.getElementById("todo-list");
+
+			if (!(list instanceof TodoList)) {
+				throw new Error("list is not a TodoList")
+			}
+			let todo = new Todo(subject, false)
+			console.log(list)
+			list.newTodo(todo)
+
+			// let li = document.createElement("li");
+			// li.appendChild(makeTodo(subject.value, false));
+			// let ul = document.getElementById("todo-list");
+			// ul.appendChild(li);
 			// synchronize list with server...
 		});
 	}
 </script>
 
-<div id="todo-container">
+<div id="todo-container" />
 
-	<todo-list> 
+	<todo-list id="todo-list" > 
 	<!-- <ul id="todo-list">
 		<li>
 			{todos.map((item) => <Todo name={item.name} />)}
