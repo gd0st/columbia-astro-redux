@@ -1,46 +1,9 @@
 ---
 import Todo from "./Todo.astro";
-let { todos = [] } = Astro.props;
-console.log(todos);
+let { todos = [{ subject: "New Todo" }] } = Astro.props;
 ---
 
 <script>
-
-	class Todo extends HTMLDivElement {
-		name;
-		status;
-		constructor(name, done) {
-			super();
-			this.className = "todo"
-			let input = document.createElement("input");
-			input.type = "checkbox";
-			let label = document.createElement("label");
-			label.textContent = name
-			this.appendChild(input)
-		}
-	}
-
-	customElements.define("col-todo", Todo, { extends: "div"})
-
-	class TodoList extends HTMLUListElement {
-		constructor() {
-			super();
-		}
-
-		/**
-		 * 
-		 * @param {Todo} todo 
-		 */
-		newTodo(todo) {
-			let li = document.createElement("li")
-			 li.appendChild(todo)
-			this.appendChild(li)
-		}
-	}
-
-	customElements.define("todo-list", TodoList, {extends: "ul"})
-
-
 	/**
 	 * Constructs the Todo object
 	 * @param {string} subject
@@ -52,15 +15,39 @@ console.log(todos);
 			done: done,
 		};
 
-		let div = document.createElement("div");
-		div.className = "todo";
-		let input = document.createElement("input");
-		input.type = "checkbox";
-		let label = document.createElement("label");
-		label.textContent = subject;
-		div.appendChild(input);
-		div.appendChild(label);
-		return div;
+		let listItem = document.createElement("li");
+		let checkbox = document.createElement("input");
+		checkbox.type = "checkbox";
+
+		let checkboxLabel = document.createElement("label");
+		checkboxLabel.textContent = subject;
+
+		listItem.appendChild(checkbox);
+		listItem.appendChild(checkboxLabel);
+		listItem.className = "todo";
+		return listItem;
+	}
+
+	function makeTodoList(title, todos) {
+		let parentUi = document.createElement("div");
+		let listItems = document.createElement("ul");
+		todos.array.forEach((element) => {
+			let todo = makeTodo(element.subject, element.done);
+			listItems.appendChild(todo);
+		});
+		parentUi.appendChild(listItems);
+		parentUi.className = "todo-list";
+		return parentUi;
+	}
+
+	function appendTodo(list, todo) {
+		if (!(list instanceof HTMLUListElement)) {
+			throw new Error("list child is not ul");
+		}
+		let task = makeTodo(todo.subject, todo.done);
+		list.appendChild(task);
+
+		return list;
 	}
 	let todoForm = document.getElementById("todo-form");
 
@@ -72,35 +59,73 @@ console.log(todos);
 				throw new Error("todo-subject is not input field.");
 			}
 
+			let todo = { subject: subject.value, done: false };
 			let list = document.getElementById("todo-list");
-
-			if (!(list instanceof TodoList)) {
-				throw new Error("list is not a TodoList")
-			}
-			let todo = new Todo(subject, false)
-			console.log(list)
-			list.newTodo(todo)
-
-			// let li = document.createElement("li");
-			// li.appendChild(makeTodo(subject.value, false));
-			// let ul = document.getElementById("todo-list");
-			// ul.appendChild(li);
-			// synchronize list with server...
+			appendTodo(list, todo);
 		});
 	}
 </script>
 
-<div id="todo-container" />
+<script is:inline>
+	async function handleComplete(item) {
+		if (!(item instanceof HTMLInputElement)) {
+			throw new Error("Check is not an input");
+		}
 
-	<todo-list id="todo-list" > 
-	<!-- <ul id="todo-list">
-		<li>
-			{todos.map((item) => <Todo name={item.name} />)}
-		</li>
-	</ul> -->
+		let labels = item.labels;
 
+		if (labels.length != 1) {
+			throw new Error("No task item");
+		}
+
+		let label = labels[0];
+
+		let task = {
+			subject: label.textContent.trim(),
+			done: item.checked,
+		};
+		let url = "http://localhost:5432/update/task";
+
+		let body = JSON.stringify(task);
+
+		let res = await fetch(url, {
+			method: "POST",
+			body: body,
+			headers: {
+				"Content-type": "application/json",
+			},
+		});
+
+		if (res.ok) {
+			label.className = task.done ? "crossed" : "";
+		} else {
+			console.error(res.statusText, res.status);
+		}
+
+		// Sender OK
+	}
+</script>
+
+<div id="todo-container">
+	<ul id="todo-list">
+		{
+			todos.map((item) => (
+				<>
+					<label>
+						<input
+							class="task-completion"
+							type="checkbox"
+							checked={item.done}
+							onchange="handleComplete(this)"
+						/>
+						{item.subject}
+					</label>
+				</>
+			))
+		}
+	</ul>
 	<form action="" id="todo-form">
-		<fieldset id="new-todo">
+		<fieldset id="todo-input">
 			<input id="todo-subject" type="text" placeholder="New Todo" />
 			<button type="submit">Add</button>
 		</fieldset>
@@ -110,29 +135,18 @@ console.log(todos);
 <style>
 	#todo-container {
 		display: grid;
-		background-color: var(--primary);
-		color: var(--text);
-		--primary: #6f4d3c;
-		--secondary: #c2a764;
-		--text: #eddce5;
+		border: 2px solid black;
 	}
-	fieldset {
-		border: none;
-		padding: 0;
+
+	.crossed {
+		text-decoration: line-through;
 	}
 	ul {
 		list-style: none;
 		padding-left: 0;
 	}
 
-	#new-todo > input,
-	#new-todo > button {
+	fieldset {
 		border: none;
-		background-color: transparent;
-	}
-
-	#new-todo {
-		border: 
-		background-color: var(--secondary);
 	}
 </style>
