@@ -1,65 +1,70 @@
 ---
-import Projects from "../components/projects/Projects.astro";
-import Section from "../components/Section.astro";
 import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import { manifest } from "astro:ssr-manifest";
+
+let projects = [
+  {
+    name: "Kadeu",
+    href: "https://github.com/gd0st/kadeu",
+    description:
+      "A lightweight CLI first flashcard application focused on utilizing serialized data formats.",
+  },
+  {
+    name: "Columbia",
+    href: "https://github.com/gd0st/columbia-astro-redux",
+    description: "This website!",
+  },
+];
 ---
 
-<Layout>
-	<div class="shell">
-		<Section title="" anchor="">
-			<p>
-				Thank you for visiting my website. Browser my <a
-					href="#projects">projects</a
-				>, or read some content
-			</p>
-			<p>I live in Chicago, and work for a Propritary Trading company</p>
-			<p>For recreation, I enjoy playing rugby, music and writing code</p>
-			<p>
-				If you'd like to get in contact, check out the <a href="#extra"
-					>extra</a
-				> section
-			</p>
-		</Section>
-		<Section title="blog" anchor="blog" brief="Straight from the dome" />
-		<Section
-			title="projects"
-			brief="Let me show you my wares"
-			anchor="projects"
-		>
-			<Projects />
-		</Section>
-		<Section title="extra" anchor="extra" brief="" />
-		<!-- <div>One</div>
-	<div>Two</div>
-	<div>Adding more text here</div>
-	<div>Four</div>
-	<div>Five</div>
-	<div>Six</div>
-	<div>Seven</div> -->
-	</div>
+<Layout title="Home">
+  <Card title="Yannick Dorn">
+    <p>
+      Hi,<br />Thank you visting my website. I live in Chicago and work for
+      Proprietary Trading Firm. I like to write code with Rust, Golang, Python
+      and JS. I also like to play Rugby on the weekends.<br />If you would like
+      to reach out, please use one of the contact options below.
+    </p>
+  </Card>
+  <Card title="Projects">
+    <ul class="projects-list">
+      {
+        projects.map((project) => {
+          return (
+            <a href={project.href}>
+              <li>
+                <h4>{project.name}</h4>
+                <p>{project.description}</p>
+              </li>
+            </a>
+          );
+        })
+      }
+    </ul>
+  </Card>
+  <Card title="Blog" />
 </Layout>
 
 <style>
-	.shell {
-		margin: 0 auto;
-		width: 60%;
-		height: 100%;
-		display: grid;
-		gap: 1vw;
-		border: 2px solid #102031;
-		/* display: grid;
-		grid-template-columns: [first] 60% [second] auto;
-		grid-template-rows: [firstr] 60% [secondr] auto;
-		grid-gap: 1vw; */
-	}
+  .projects-list {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    gap: 1vw;
+  }
 
-	.shell {
-		padding: 0 20px;
-	}
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
-	@media screen and (max-width: 900px) {
-		.box {
-			width: 90%;
-		}
-	}
+  li:hover {
+    background-color: lightgray;
+  }
+
+  .projects-list li {
+    border: 2px solid black;
+    padding: 10px;
+  }
 </style>
