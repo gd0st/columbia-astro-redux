@@ -1,5 +1,4 @@
 ---
-import { posts } from "../lib/blog";
 import ArticleCard from "./ArticleCard.astro";
 let { articles = [], limit = 0 } = Astro.props;
 
@@ -18,7 +17,9 @@ export async function getSource() {
 	return items;
 }
 
-let blogPosts = await posts(getSource());
+// let blogPosts = await posts(getSource());
+
+let blogPosts = [];
 
 blogPosts.sort((a, b) => {
 	return a.date <= b.date ? 1 : -1;
