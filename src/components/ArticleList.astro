@@ -1,0 +1,59 @@
+---
+import { posts } from "../lib/blog";
+import ArticleCard from "./ArticleCard.astro";
+let { articles = [], limit = 0 } = Astro.props;
+
+/**
+ *
+ * @param mapping map frontmatter into new format
+ * @param filter filter results if needed
+ */
+
+export async function getSource() {
+	let items = Object.values(
+		await import.meta.glob("../pages/blog/published/*.md", {
+			eager: true,
+		}),
+	);
+	return items;
+}
+
+let blogPosts = await posts(getSource());
+
+blogPosts.sort((a, b) => {
+	return a.date <= b.date ? 1 : -1;
+});
+console.log(blogPosts);
+
+if (limit > 0) {
+	blogPosts = blogPosts.slice(0, limit);
+}
+---
+
+<div>
+	<ul>
+		<li>
+			{blogPosts.map((post) => <ArticleCard {post} />)}
+		</li>
+	</ul>
+</div>
+<style>
+	ul {
+		list-style: none;
+		padding-left: 0;
+	}
+</style>
+
+<style is:inline>
+	div {
+		width: 100%;
+	}
+	a {
+		color: white;
+	}
+	p {
+		margin: 0;
+		color: white;
+		font-size: small;
+	}
+</style>

@@ -1,0 +1,32 @@
+---
+let { title = "", content = "", image = "" } = Astro.props;
+---
+
+<section>
+	<h3>{title}</h3>
+	<slot />
+	<!-- <img src={image} /> -->
+</section>
+
+<style is:inline>
+	section * {
+		color: var(--text-color);
+	}
+</style>
+
+<style>
+	:root {
+		--main-bg-color: #1b2527;
+		--text-color: #e1eeea;
+		--button-color: #504da1;
+		--button-hover: #b1788f;
+		--button-text-hover: #b1788f;
+	}
+	h3 {
+		margin: 0;
+		color: #ff8d3e;
+	}
+	p {
+		margin: 0;
+	}
+</style>

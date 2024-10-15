@@ -1,0 +1,53 @@
+---
+let { post } = Astro.props;
+let { summary = "", date = "" } = post;
+let { card } = Astro.props;
+
+if (date !== "") {
+	date = post.date.toDateString();
+}
+---
+
+<div>
+	<a href=`/blog/published/${post.filename}`>
+			<h3>{post.title}</h3>
+	</a>
+	<p class="date-field">{date}</p>
+	<p>{summary}</p>
+</div>
+
+<style>
+	span {
+		font-weight: lighter;
+		low
+	}
+	div {
+		padding-left: 0;
+	}
+
+	a {
+		color: white;
+	}
+	h3 {
+		margin: 0;
+		font-size:medium;
+	}
+
+	p {
+		margin: 0;
+		color: white;
+		font-size: small;
+	}
+
+	.date-field {
+		font-size: x-small;
+	}
+
+	a:hover {
+		color: #ff8d3e;
+	}
+	ul {
+		display: flex;
+		list-style: none;
+	}
+</style>

@@ -1,0 +1,49 @@
+---
+let { links = [] } = Astro.props;
+---
+
+<ul>
+	{
+		links.map((link) => {
+			let href = link.href;
+			return (
+				<li class={link.select ? "selected" : ""}>
+					<a href={link.href}>{link.display}</a>
+				</li>
+			);
+		})
+	}
+</ul>
+
+<style>
+	ul {
+		list-style: none;
+		display: flex;
+		padding-left: 0;
+	}
+
+	.selected > a {
+		color: white;
+		/* border-left: 5px solid #ff8d3e; */
+	}
+
+	li {
+		margin-inline-start: 10px;
+	}
+
+	li:hover {
+		background-color: #ff8d3e;
+	}
+
+	li:hover > a {
+		color: white;
+	}
+
+	a {
+		font-size: large;
+		padding: 5px;
+		text-decoration: underline;
+		color: #ff8d3e;
+		text-align: center;
+	}
+</style>
