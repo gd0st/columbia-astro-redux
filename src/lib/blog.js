@@ -1,5 +1,3 @@
-import path from "node:path"
-
 class Post {
 	title;
 	date;
