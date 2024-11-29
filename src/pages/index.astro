@@ -1,74 +1,173 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ArticleList from "../components/ArticleList.astro";
-import Section from "../components/Section.astro";
+// TODO looking better on desktop, but needs to scale for mobile.
+
+let networking = [
+  {
+    name: "Github",
+    href: "https://github.com/gd0st",
+    display: true,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/in/ydorn",
+    display: true,
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/yannick_dorn/",
+    display: true,
+  },
+].filter((item) => item.display);
 
 let projects = [
-	{
-		name: "Kadeu",
-		href: "https://github.com/gd0st/kadeu",
-		description:
-			"A lightweight CLI first flashcard application focused on utilizing serialized data formats.",
-	},
-	{
-		name: "Columbia",
-		href: "https://github.com/gd0st/columbia-astro-redux",
-		description: "This website!",
-	},
-];
+  {
+    name: "Kadeu",
+    href: "https://github.com/gd0st/kadeu",
+    display: true,
+    description:
+      "A lightweight CLI first flashcard application focused on utilizing serialized data formats. Features include a randomized sorting system, a terminal UI and a flashcard importing and browsing system.",
+  },
+  {
+    name: "Columbia",
+    href: "https://github.com/gd0st/columbia-astro-redux",
+    display: true,
+    description: "This website!",
+  },
+  {
+    name: "Hermis",
+    href: "http://hermis.ydorn.com",
+    display: false,
+    description:
+      "A simple RSS reader with customizable weights and predictably randomized seeding system.",
+  },
+].filter((project) => project.display);
 ---
 
 <Layout title="Home">
-	<Section title="About Me">
-		<p>
-			Hi,<br />Thank you visting my website. I live in Chicago and work
-			for Proprietary Trading Firm. I like to write code with Rust,
-			Golang, Python and JS. I also like to play Rugby on the weekends.<br
-			/>If you want to reach out, please use one of the contact options
-			below.
-		</p>
-	</Section>
-	<Section title="Projects">
-		<ul class="projects-list">
-			{
-				projects.map((project) => {
-					return (
-						<li>
-							<a href={project.href}>
-								<h4>{project.name}</h4>
-							</a>
-							<p>{project.description}</p>
-						</li>
-					);
-				})
-			}
-		</ul>
-	</Section>
+  <header>
+    <h1>Yannick Dorn</h1>
+  </header>
 
-	<Section title="Reading">
-		<ArticleList />
-	</Section>
+  <main>
+    <section>
+      <p>Hi,</p>
+      <p>Thank you for visiting my website!</p>
+      <p>
+        I live in Chicago and work for a futures trading firm as a technology
+        operations engineer.
+      </p>
+
+      <p>I also write code in Rust, Javascript and Python.</p>
+
+      <p>
+        Please visit in my projects, and read my blog. If you'd like to get in
+        contact, use one of the links below.
+      </p>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+
+      {
+        projects.map((project) => {
+          return (
+            <div>
+              <a href={project.href}>
+                <h4>{project.name}</h4>
+              </a>
+              <p>{project.description}</p>
+            </div>
+          );
+        })
+      }
+    </section>
+
+    <section>
+      <h2>The Complaint Box</h2>
+    </section>
+  </main>
+
+  <footer>
+    <ul>
+      {
+        networking.map((item) => {
+          return (
+            <a href={item.href}>
+              <li>{item.name}</li>
+            </a>
+          );
+        })
+      }
+    </ul>
+  </footer>
 </Layout>
-
 <style>
-	:root {
-		--main-bg-color: #1b2527;
-		--text-color: #e1eeea;
-		--button-color: #7ea7ae;
-		--button-hover: #b1788f;
-		--button-text-hover: #b1788f;
-	}
-	.projects-list {
-		list-style: none;
-		padding-left: 0;
-	}
+  :root {
+    --main-bg-color: #1b2527;
+    /* --text-color: #e1eeea; */
+    --header-color: #f26523;
+    --text-color: #c4beae;
+    --accent-color: #1aab9f;
+    --secondary-accent-color: #125d60;
+  }
 
-	.projects-list > li {
-		margin-block-start: 1.5rem;
-		padding-left: 1vw;
-	}
+  a,
+  a:hover,
+  a:visited {
+    color: var(--accent-color);
+  }
+  h1,
+  h2 {
+    color: var(--header-color);
+  }
 
-	a:hover {
-		color: #ff8d3e;
-	}
+  header,
+  main,
+  footer {
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+  }
+
+  section {
+    border-left: 2px solid var(--header-color);
+    border-right: 2px solid var(--header-color);
+  }
+
+  main,
+  header,
+  footer {
+    width: 75ch;
+    margin: 0 auto;
+  }
+
+  section {
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    gap: 2vw;
+    justify-content: center;
+  }
+
+  li {
+    display: inline;
+  }
+  .projects-list {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .projects-list > li {
+    margin-block-start: 1.5ch;
+    padding-left: 1vw;
+  }
+
+  a:hover {
+    color: #ff8d3e;
+  }
 </style>

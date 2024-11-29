@@ -1,4 +1,12 @@
 ---
+/**
+ * Colors 
+ * font : 
+    color: #e1eeea;
+	background: 
+    background-color: #1b2527;
+    borders & headers : 2px solid #ff8d3e;
+ */
 import Card from "../components/Card.astro";
 import Nav from "../components/Nav.astro";
 import Section from "../components/Section.astro";
@@ -6,123 +14,73 @@ import Section from "../components/Section.astro";
 const { title } = Astro.props;
 
 let navLink = (display) => (href) => {
-	return {
-		display: display,
-		href: href,
-		select: href == Astro.url.pathname,
-	};
+  return {
+    display: display,
+    href: href,
+    select: href == Astro.url.pathname,
+  };
 };
 
 let navLinks = [navLink("home")("/")];
 
 let social_links = [
-	{ name: "Github", href: "https://github.com/gd0st" },
-	{
-		name: "Instagram",
-		href: "https://instagram.com/yannick_dorn",
-	},
+  { name: "Github", href: "https://github.com/gd0st" },
+  {
+    name: "Instagram",
+    href: "https://instagram.com/yannick_dorn",
+  },
 ];
 
 const version = "0.3.0";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<!-- <link rel="icon" type="image/png" href="/icon.webp" /> -->
-		<link rel="icon" type="images/x-icon" href="/icon.ico" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-			rel="stylesheet"
-		/>
-		<title>{title}</title>
-	</head>
+  <head>
+    <meta charset="utf-8" />
+    <!-- <link rel="icon" type="image/png" href="/icon.webp" /> -->
+    <link rel="icon" type="images/x-icon" href="/icon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
 
-	<body>
-		<header>
-			<h1>Yannick's Website</h1>
-			<nav>
-				<Nav links={navLinks} />
-			</nav>
-		</header>
-		<main>
-			<slot />
-		</main>
-		<footer>
-			<ul>
-				{
-					social_links.map((item) => {
-						return (
-							<li>
-								<a href={item.href}>{item.name}</a>
-							</li>
-						);
-					})
-				}
-			</ul>
-			<a id="version-descriptor" href="https://github.com/gd0st">
-				<p>v {version}</p>
-			</a>
-		</footer>
-	</body>
+  <body>
+    <slot />
+  </body>
 </html>
 
 <style>
-	body > * + * {
-		margin-block-start: 0.2rem;
-		max-width: 650px;
-		background-color: #1b2527;
-	}
-
-	header {
-		color: #e1eeea;
-		justify-content: center;
-	}
-
-	body {
-		display: grid;
-		justify-content: center;
-		background-color: #1b2527;
-	}
-
-	main {
-		margin: 0 auto;
-		border: 2px solid #ff8d3e;
-		padding: 1vw;
-		display: grid;
-		gap: 1vw;
-	}
-
-	footer a {
-		padding: 5px;
-		text-decoration: underline;
-		color: #ff8d3e;
-		text-align: center;
-	}
-
-	footer > ul {
-		list-style: none;
-		display: flex;
-		grid-template-columns: repeat(3, 1fr);
-	}
+  :root {
+    --main-bg-color: #1b2527;
+    --text-color: #e1eeea;
+    --button-color: #7ea7ae;
+    --button-hover: #b1788f;
+    --button-text-hover: #b1788f;
+  }
+  body {
+    background-color: var(--main-bg-color);
+  }
 </style>
 
 <style is:global>
-	@font-face {
-		font-family: "Press Start 2P";
-		src: url("/fonts/PressStart2P-Regular.ttf");
-		font-weight: normal;
-		font-style: normal;
-		font-display: swap;
-	}
+  @font-face {
+    font-family: "Press Start 2P";
+    src: url("/fonts/PressStart2P-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 
-	@font-face {
-		font-family: "Orbitron";
-		src: url("/fonts/Orbitron-Regular.ttf");
-		font-weight: normal;
-		font-style: normal;
-		font-display: swap;
-	}
+  @font-face {
+    font-family: "Orbitron";
+    src: url("/fonts/Orbitron-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 </style>
